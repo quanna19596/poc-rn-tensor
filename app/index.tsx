@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Button, Image, View, StyleSheet } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import * as tf from "@tensorflow/tfjs";
-import '@tensorflow/tfjs-react-native';
-import * as mobilenet from "@tensorflow-models/mobilenet";
 
 export default function ImagePickerExample() {
   const [image, setImage] = useState<string | null>(null);
@@ -41,21 +38,7 @@ export default function ImagePickerExample() {
   };
 
   const getImageData = async (): Promise<void> => {
-    try {
-      if (image) {
-        await tf.ready();
-        const model = await mobilenet.load();
-        const img = new Image({
-          src: image,
-          onLoad: async () => {
-            const predictions = await model.classify(img as any);
-            console.log(predictions);
-          },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    
     
   };
 
